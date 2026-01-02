@@ -45,3 +45,50 @@ L_{Final}^{(i)} = \begin{cases}
 L_{Pred}^{(i)} & \text{if } L_{GT}^{(i)} \neq L_{Pred}^{(i)} \text{ and } (P_{Pred}^{(i)} > \tau \text{ or } P_{Pred}^{(i)} < 1-\tau) \\
 L_{GT}^{(i)} & \text{otherwise}
 \end{cases}
+* **Threshold ($\tau$):** 0.90 (High confidence required to flip a label).
+
+### 4. Classification Models
+The corrected dataset is used to train:
+* **1D CNN:** Filters=3, Kernel=2, Dropout=0.25.
+* **Bi-LSTM:** 20 units with MaxPooling1D.
+* **Fully Dense Network:** Layers of 128, 64, and 1 unit (Sigmoid output).
+
+---
+
+## Tech Stack
+* **Language:** Python 3.x
+* **Deep Learning:** TensorFlow / Keras
+* **Transformers:** HuggingFace transformers, TensorFlow Hub
+* **Clustering/Stats:** Scikit-learn, UMAP-learn
+* **Data Handling:** Pandas, NumPy
+* **API:** Reddit JSON API
+
+---
+
+## Experiments & Results
+Classifiers were trained for 80 epochs (Batch size: 32, Optimizer: Adam).
+
+### Key Findings
+* **Label Correction Efficacy:** Classifiers trained on corrected labels consistently outperformed those trained on raw, noisy Reddit labels.
+* **Best Architecture:** The **Fully Dense Neural Network** achieved the highest accuracy on the corrected embeddings.
+* **Complexity:** The dimensionality-reduced features were robust enough that complex temporal modeling (like LSTM) was not strictly necessary compared to dense layers.
+* **Note:** The correction pipeline successfully identified posts in depression subreddits that exhibited clear suicidal intent, which were previously mislabeled by the ground truth.
+
+---
+
+## Project Structure
+
+```bash
+.
+├── data/
+│   ├── raw/             # Scraped Reddit data
+│   └── processed/       # Embeddings and corrected labels
+├── src/
+│   ├── scraper.py       # Reddit JSON API scraper
+│   ├── embeddings.py    # BERT and GUSE extraction
+│   ├── dim_reduction.py # PCA, Autoencoder, UMAP implementations
+│   ├── clustering.py    # GMM, K-Means, SSC logic
+│   ├── correction.py    # Threshold-based label correction script
+│   └── classifiers.py   # CNN, Bi-LSTM, Dense Net definitions
+├── requirements.txt
+└── README.md
