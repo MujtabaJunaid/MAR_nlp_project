@@ -7,18 +7,18 @@ This project presents a novel Natural Language Processing (NLP) framework design
 
 Unlike traditional approaches that perform binary classification between "Healthy" and "Suicidal" states, this study addresses the noisy nature of user-generated content (where depression and suicide forums often overlap in intent). The solution employs a two-stage pipeline:
 
-1.  **Unsupervised Label Correction:** Using clustering and confidence thresholds to clean noisy ground-truth labels.
-2.  **Supervised Classification:** Training Deep Neural Networks on the refined data to achieve superior accuracy.
+1. **Unsupervised Label Correction:** Using clustering and confidence thresholds to clean noisy ground-truth labels.
+2. **Supervised Classification:** Training Deep Neural Networks on the refined data to achieve superior accuracy.
 
 ---
 
 ## Pipeline Architecture
 The system follows a sequential workflow:
 
-1.  **Data Collection:** Web-scraping Reddit (`r/depression`, `r/SuicideWatch`).
-2.  **Feature Extraction:** Generating embeddings using BERT and Google Universal Sentence Encoder (GUSE).
-3.  **Unsupervised Correction (Phase 1):** Dimensionality reduction and clustering to re-label data.
-4.  **Supervised Classification (Phase 2):** Training CNN, Bi-LSTM, and Dense Networks on corrected labels.
+1. **Data Collection:** Web-scraping Reddit (`r/depression`, `r/SuicideWatch`).
+2. **Feature Extraction:** Generating embeddings using BERT and Google Universal Sentence Encoder (GUSE).
+3. **Unsupervised Correction (Phase 1):** Dimensionality reduction and clustering to re-label data.
+4. **Supervised Classification (Phase 2):** Training CNN, Bi-LSTM, and Dense Networks on corrected labels.
 
 ---
 
@@ -40,7 +40,6 @@ Reduced features are processed by **GMM (Gaussian Mixture Models)**, **K-Means**
 
 Noisy labels are corrected using a confidence-based thresholding formula:
 
-```math
 $$
 L_{Final}^{(i)} = \begin{cases} 
 L_{Pred}^{(i)} & \text{if } L_{GT}^{(i)} \neq L_{Pred}^{(i)} \text{ and } (P_{Pred}^{(i)} > \tau \text{ or } P_{Pred}^{(i)} < 1-\tau) \\
