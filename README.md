@@ -41,10 +41,13 @@ Reduced features are processed by **GMM (Gaussian Mixture Models)**, **K-Means**
 Noisy labels are corrected using a confidence-based thresholding formula:
 
 ```math
+$$
 L_{Final}^{(i)} = \begin{cases} 
 L_{Pred}^{(i)} & \text{if } L_{GT}^{(i)} \neq L_{Pred}^{(i)} \text{ and } (P_{Pred}^{(i)} > \tau \text{ or } P_{Pred}^{(i)} < 1-\tau) \\
 L_{GT}^{(i)} & \text{otherwise}
 \end{cases}
+$$
+
 * **Threshold ($\tau$):** 0.90 (High confidence required to flip a label).
 
 ### 4. Classification Models
