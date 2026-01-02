@@ -1,6 +1,6 @@
 # Distinguishing Suicidal Ideation from Depression: A Two-Stage NLP Pipeline with Unsupervised Label Correction
 
-**Author:** A. Author (Student, FAST NUCES)
+**Author:** Rayan Farhan (22k-4102), Mujtaba Junaid (22k-8709), Anas Soharwardy(22k-4049)
 
 ## Abstract
 This project presents a novel Natural Language Processing (NLP) framework designed to classify the distinct psychological states of **Suicidal Ideation** versus **Depression** in social media text.
@@ -94,3 +94,4 @@ Classifiers were trained for 80 epochs (Batch size: 32, Optimizer: Adam).
 │   └── classifiers.py   # CNN, Bi-LSTM, Dense Net definitions
 ├── requirements.txt
 └── README.md
+
